@@ -15,13 +15,13 @@ namespace Inventory_System
             while (running)
             {
                 Console.Clear();
-                Console.WriteLine("=== RAKTÁRKEZELŐ RENDSZER (v1.0) ===");
-                Console.WriteLine("1. Termékek listázása");
-                Console.WriteLine("2. Új termék hozzáadása");
-                Console.WriteLine("3. Termék módosítása (Ár/Darab)");
-                Console.WriteLine("4. Termék törlése");
-                Console.WriteLine("5. Kilépés");
-                Console.Write("\nVálassz egy opciót: ");
+                Console.WriteLine("=== INVENTORY SYSTEM (v1.0) ===");
+                Console.WriteLine("1. List products");
+                Console.WriteLine("2. Add new product");
+                Console.WriteLine("3. Update product (Price/Quantity)");
+                Console.WriteLine("4. Delete product");
+                Console.WriteLine("5. Quit");
+                Console.Write("\nChoose an option: ");
 
                 var option = Console.ReadLine();
 
@@ -43,7 +43,7 @@ namespace Inventory_System
                         running = false;
                         break;
                     default:
-                        Console.WriteLine("Érvénytelen választás! Nyomj Entert...");
+                        Console.WriteLine("Invalid choice! Press Enter...");
                         Console.ReadLine();
                         break;
                 }
@@ -53,67 +53,67 @@ namespace Inventory_System
         static void ListItems()
         {
             Console.Clear();
-            Console.WriteLine("--- JELENLEGI KÉSZLET ---\n");
+            Console.WriteLine("--- CURRENT STOCK ---\n");
             _service.ListProducts();
-            Console.WriteLine("\nNyomj Entert a visszalépéshez...");
+            Console.WriteLine("\nPress Enter to go back....");
             Console.ReadLine();
         }
 
         static void AddItem()
         {
             Console.Clear();
-            Console.WriteLine("--- ÚJ TERMÉK FELVÉTELE ---\n");
+            Console.WriteLine("--- ADDING NEW PRODUCT ---\n");
 
-            Console.Write("Név: ");
+            Console.Write("Name: ");
             string name = Console.ReadLine();
 
-            Console.Write("Mennyiség (db): ");
+            Console.Write("Quantity: ");
             int quantity = int.Parse(Console.ReadLine());
 
-            Console.Write("Ár (Ft): ");
+            Console.Write("Price (HUF): ");
             decimal price = decimal.Parse(Console.ReadLine());
 
             _service.AddProduct(name, quantity, price);
 
-            Console.WriteLine("\nSikeres mentés! Nyomj Entert...");
+            Console.WriteLine("\nSuccessful save! Press Enter...");
             Console.ReadLine();
         }
 
         static void UpdateItem()
         {
             Console.Clear();
-            Console.WriteLine("--- TERMÉK MÓDOSÍTÁSA ---\n");
+            Console.WriteLine("--- UPDATING PRODUCT ---\n");
             _service.ListProducts(); 
             Console.WriteLine("-------------------------");
 
-            Console.Write("Melyik ID-jú terméket módosítanád?: ");
+            Console.Write("Which product ID would you like to update?: ");
             int id = int.Parse(Console.ReadLine());
 
-            Console.Write("Új mennyiség: ");
+            Console.Write("New quantity: ");
             int quantity = int.Parse(Console.ReadLine());
 
-            Console.Write("Új ár: ");
+            Console.Write("New price: ");
             decimal price = decimal.Parse(Console.ReadLine());
 
             _service.UpdateProduct(id, quantity, price);
 
-            Console.WriteLine("\nSikeres módosítás! Nyomj Entert...");
+            Console.WriteLine("\nSuccessful update! Press Enter...");
             Console.ReadLine();
         }
 
         static void DeleteItem()
         {
             Console.Clear();
-            Console.WriteLine("--- TERMÉK TÖRLÉSE ---\n");
+            Console.WriteLine("--- DELETING PRODUCT ---\n");
             _service.ListProducts();
             Console.WriteLine("-------------------------");
 
-            Console.Write("Melyik ID-jú terméket töröljük?: ");
+            Console.Write("Which product ID would you like to delete?: ");
             int id = int.Parse(Console.ReadLine());
 
             _service.DeleteProduct(id);
 
-            Console.WriteLine("\nTermék törölve! Nyomj Entert...");
+            Console.WriteLine("\nProduct deleted! Press Enter...");
             Console.ReadLine();
         }
     }
