@@ -31,11 +31,11 @@ namespace Inventory_System.Services
             {
                 Console.WriteLine($"ID: {product.Id}, Name: {product.Name}, Quantity: {product.Quantity}, Price: {product.Price:C} Ft");
             }
-        }
+        }    
 
-        public void DeleteProduct(string name)
+        public void DeleteProduct(int id)
         {
-            var product = _db.Products.FirstOrDefault(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            var product = _db.Products.Find(id);
             if (product != null)
             {
                 _db.Products.Remove(product);
@@ -48,12 +48,13 @@ namespace Inventory_System.Services
             }
         }
 
-        public void UpdateProductQuantity(string name, int newQuantity)
+        public void UpdateProduct(int id, int newQuantity, decimal newPrice)
         {
-            var product = _db.Products.FirstOrDefault(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            var product = _db.Products.Find(id);
             if (product != null)
             {
                 product.Quantity = newQuantity;
+                product.Price = newPrice;
                 _db.SaveChanges();
                 Console.WriteLine("Product quantity updated successfully!");
             }
