@@ -10,6 +10,11 @@ namespace Inventory_System.Services
     {
         private InventoryContext _db = new InventoryContext();
 
+        public void EnsureDatabaseCreated()
+        {
+            _db.Database.EnsureCreated();
+        }
+
         public void AddProduct(string name, int quantity, decimal price)
         {
             var newProduct = new Product
